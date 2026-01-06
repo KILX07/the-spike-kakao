@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>더 스파이크 크로스 통합 규정</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        /* CSS 변수 설정 (다크모드 기본값) */
+        :root {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-header: #020617;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border: #334155;
+            --accent: #00fff0;
+            --toc-bg: #1e293b;
+            --toc-text: #f8fafc;
+            --inner-bg: #0f172a;
+        }
+
+        /* 라이트모드 변수 */
+        body.light-mode {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-header: #0f172a;
+            --text-main: #1e293b;
+            --text-sub: #475569;
+            --border: #e2e8f0;
+            --accent: #006eff;
+            --toc-bg: #ffffff;
+            --toc-text: #0f172a;
+            --inner-bg: #f8fafc;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--bg-header);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 { margin: 0; font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+        header p { margin: 15px 0 0; font-size: 15px; opacity: 0.8; font-weight: 300; }
+
+        .컨테이너 { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* 목차 영역 */
+        .목차-네비 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: -80px;
+            margin-bottom: 50px;
+        }
+        .목차-링크 {
+            background: var(--toc-bg);
+            border: 1px solid var(--border);
+            padding: 20px 5px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--toc-text);
+            font-weight: 800;
+            font-size: 13.5px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+        .목차-링크:hover { transform: translateY(-5px); background: var(--accent); color: white; }
+
+        .상단-공지 {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            font-size: 15px;
+        }
+
+        /* 규정 카드 및 아코디언 */
+        .규정-섹션 {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .섹션-헤더 {
+            background: rgba(0,0,0,0.1);
+            padding: 20px 30px;
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .항-그룹 { border-bottom: 1px solid var(--border); }
+        .항-그룹:last-child { border-bottom: none; }
+
+        .항-클릭 {
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .항-클릭:hover { background: rgba(255,255,255,0.05); }
+        .항-클릭 h3 { margin: 0; font-size: 17px; font-weight: 700; }
+        .항-클릭.active .아이콘 { transform: rotate(180deg); color: var(--accent); }
+        .아이콘 { font-size: 10px; color: var(--text-sub); transition: 0.3s; }
+
+        .항-상세 {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: var(--inner-bg);
+        }
+        .상세-본문 {
+            padding: 25px 40px;
+            font-size: 14.5px;
+            color: var(--text-sub);
+            border-top: 1px dashed var(--border);
+            white-space: pre-wrap;
+            border-left: 3px solid var(--accent);
+            margin: 0 30px 20px;
+        }
+
+        .강조 { color: var(--accent); font-weight: 800; text-decoration: underline; }
+
+        /* 테마 토글 버튼 */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .theme-toggle:active { transform: scale(0.9); }
+
+        .디스코드-버튼 {
+            display: block;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 22px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 900;
+            margin: 50px 0;
+            font-size: 18px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .개정-기록 {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: var(--text-sub);
+            border: 1px solid var(--border);
+        }
+
+        footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 13px; }
+
+        @media (max-width: 850px) {
+            .목차-네비 { grid-template-columns: repeat(2, 1fr); }
+            .목차-링크:last-child { grid-column: span 2; }
+            .상세-본문 { padding: 20px; margin: 0 15px 15px; }
+            header { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body class="dark-mode"> <!-- 기본값 다크모드 -->
+
+<!-- 테마 토글 버튼 -->
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
+
+<header>
+    <h1>더 스파이크 크로스 통합 규정</h1>
+    <p>통합 운영 규정 (개정판) 
+</header>
+
+<div class="컨테이너">
+    <nav class="목차-네비">
+        <a href="#art1" class="목차-링크">운영 정책 및 권한</a>
+        <a href="#art2" class="목차-링크">관리자의 역할</a>
+        <a href="#art3" class="목차-링크">개인정보 및 보호</a>
+        <a href="#art4" class="목차-링크">핵심 위반 사항</a>
+    </nav>
+
+    <div class="상단-공지">
+        <b>통합 규정 안내:</b> 본 규정은 오픈채팅방의 특수성을 반영한 최종 본입니다. <b>항목을 클릭</b>하면 상세 조항이 펼쳐집니다. <span class="강조">"공지 미숙지"는 면책 사유가 되지 않습니다.</span>
+    </div>
+
+    <!-- 제1조 운영 정책 및 회원의 의무 -->
+    <div class="규정-섹션" id="art1">
+        <div class="섹션-헤더">제1조 운영 정책 및 참여자의 의무</div>
+        
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 운영 정책의 목적 및 변경 권한</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 본 정책은 더 스파이크 크로스 소통방의 원활한 운영 및 쾌적한 환경 조성을 목적으로 한다.
+2. 정책은 카페 내 및 소통방 내 모든 메시지, 사진, 영상 등에 적용된다.
+3. 운영진은 별도의 통보 없이 본 정책을 추가/수정/삭제할 수 있으며 변경 즉시 효력이 발생한다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 참여자의 숙지 의무</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 회원은 변경된 공지 내용을 주기적으로 숙지해야 하며, <span class="강조">공지 미숙지로 인해 발생한 불편함이나 제재에 대해서는 운영진이 도움을 드릴 수 없다.</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 제2조 관리자의 역할 -->
+    <div class="규정-섹션" id="art2">
+        <div class="섹션-헤더">제2조 관리자의 역할 및 권한</div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 질서 유지 및 제재 권한</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 관리자(방장 및 부방장)는 운영 정책을 기반으로 쾌적한 환경 조성을 위해 활동한다.
+2. 원활한 운영을 위해 정책 위반 메시지를 <span class="강조">통보 없이 삭제</span>할 수 있으며, 위반 사용자의 이용을 <span class="강조">통보 없이 제한(내보내기)</span> 할 전권을 가진다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 문의 응대 원칙</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 관리자는 운영의 공평성을 위해 개인적인 1:1 대화, 메일 등을 통한 사적인 게임 문의에 답변하지 않는다.
+2. 게임 관련 문의는 반드시 공식 카페 게시판 혹은 공식 고객센터 메일(support@suncyan.com)을 이용해야 한다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 제3조 개인정보 및 보호 -->
+    <div class="규정-섹션" id="art3">
+        <div class="섹션-헤더">제3조 개인정보 관리 및 피해 구제</div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 본인 책임의 원칙</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 계정 및 프로필 관리 책임은 일차적으로 본인에게 있으며, 부주의로 발생한 피해(계정 탈취 등)에 대해 운영진은 책임을 지지 않는다.
+2. <span class="강조">계정 공유, 양도, 아이템 현금 거래</span> 등으로 발생하는 모든 피해의 결과는 본인에게 있다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 사기 피해 예방</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 개인 간에 발생한 재화/계정 사기 문제에 대해 관리자가 개입하거나 도움을 드리기 어렵다.
+2. 운영진은 특수 상황(이벤트 등) 외에는 절대 개인정보를 요구하지 않으므로 사칭 행위에 주의해야 한다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 제4조 핵심 위반 사항 -->
+    <div class="규정-섹션" id="art4">
+        <div class="섹션-헤더">제4조 핵심 위반 사항 및 제재 기준</div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 소통 예절 및 친목 금지</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 상호 존댓말 준수: 욕설뿐 아니라 비꼬기, 반말, 하대 등 불쾌감을 주는 말투 금지.
+2. 친목 및 배척: 특정 유저 호출 및 사적 대화로 신규 유저를 소외시키는 '텃세' 행위 엄격 금지.
+3. 분위기 저해: 과도한 개인사 공개(TMI) 및 위로 강요 행위 금지.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 기만 및 불법 프로그램</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 기만(비틱): 질문을 가장한 자랑 행위 및 타인의 실패 조롱 금지.
+2. 불법 프로그램: 핵, 매크로 정보 공유 및 옹호 시 <span class="강조">경고 없이 영구 강퇴</span>.
+3. 허위 사실 유포: 확인되지 않은 뇌피셜로 혼란 야기 시 제재.</div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://discord.gg/J8he2mUFQC" class="디스코드-버튼"> 디스코드 서버 바로가기</a>
+
+    <div class="개정-기록">
+        <strong>규정 개정 히스토리</strong><br>
+        • 2026.01.06 : 대충 개편<br>
+        • 2025.12.05 : 관리자 재량권 및 거래 금지 <br>
+        • 2025.10.26 : 사생활 관련 조항 추가<br>
+        • 2025.06.28 : 최초 규정 수립
+    </div>
+
+    <footer>
+        Copyright 2026. 더 스파이크 크로스 소통방 all rights reserved.<br>
+        모든 운영 권한은 소통방 관리진에게 귀속됩니다.
+    </footer>
+</div>
+
+<script>
+    // 아코디언 기능
+    function toggle항(header) {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+            content.style.maxHeight = "0px";
+        } else {
+            content.style.maxHeight = content.scrollHeight + 100 + "px";
+        }
+    }
+
+    // 테마 전환 기능
+    function toggleTheme() {
+        const body = document.body;
+        const btn = document.getElementById('themeBtn');
+        
+        if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            btn.innerText = '☀️'; // 다크모드일 때 해 아이콘
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.add('light-mode');
+            btn.innerText = '🌙'; // 라이트모드일 때 달 아이콘
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // 페이지 로드 시 저장된 테마 적용
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            document.getElementById('themeBtn').innerText = '🌙';
+        }
+    }
+</script>
+
+</body>
+</html>
