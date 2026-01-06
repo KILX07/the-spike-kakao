@@ -64,7 +64,7 @@
         /* 목차 영역 */
         .목차-네비 {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             margin-top: -80px;
             margin-bottom: 50px;
@@ -94,7 +94,7 @@
             font-size: 15px;
         }
 
-        /* 규정 카드 및 아코디언 */
+        /* 규정 섹션 */
         .규정-섹션 {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -156,7 +156,7 @@
             height: 60px;
             border-radius: 50%;
             background: var(--accent);
-            color: white;
+            color: #000;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -172,7 +172,7 @@
         .디스코드-버튼 {
             display: block;
             background: var(--accent);
-            color: white;
+            color: #000;
             text-align: center;
             padding: 22px;
             border-radius: 15px;
@@ -190,6 +190,7 @@
             font-size: 13px;
             color: var(--text-sub);
             border: 1px solid var(--border);
+            line-height: 2;
         }
 
         footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 13px; }
@@ -198,160 +199,221 @@
             .목차-네비 { grid-template-columns: repeat(2, 1fr); }
             .목차-링크:last-child { grid-column: span 2; }
             .상세-본문 { padding: 20px; margin: 0 15px 15px; }
-            header { padding: 60px 20px; }
         }
     </style>
 </head>
-<body class="dark-mode"> <!-- 기본값 다크모드 -->
+<body class="dark-mode">
 
-<!-- 테마 토글 버튼 -->
 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
 
 <header>
     <h1>더 스파이크 크로스 통합 규정</h1>
-    <p>통합 운영 규정 (개정판) 
+    <p>[더 스파이크 크로스 소통방] 공식 운영 규정 (통합 개정판)</p>
 </header>
 
 <div class="컨테이너">
     <nav class="목차-네비">
-        <a href="#art1" class="목차-링크">운영 정책 및 권한</a>
-        <a href="#art2" class="목차-링크">관리자의 역할</a>
-        <a href="#art3" class="목차-링크">개인정보 및 보호</a>
-        <a href="#art4" class="목차-링크">핵심 위반 사항</a>
+        <a href="#art1" class="목차-링크">운영 권한</a>
+        <a href="#art2" class="목차-링크">소통 매너</a>
+        <a href="#art3" class="목차-링크">거래/행위 금지</a>
+        <a href="#art4" class="목차-링크">정보 및 질문</a>
+        <a href="#art5" class="목차-링크">안전 및 기타</a>
     </nav>
 
     <div class="상단-공지">
-        <b>통합 규정 안내:</b> 본 규정은 오픈채팅방의 특수성을 반영한 최종 본입니다. <b>항목을 클릭</b>하면 상세 조항이 펼쳐집니다. <span class="강조">"공지 미숙지"는 면책 사유가 되지 않습니다.</span>
+        <b>통합 규정 안내:</b> 본 규정은 채팅방의 규모 확대에 따라 쾌적한 환경을 유지하고 분쟁을 예방하기 위해 수립되었습니다. <b>항목 클릭 시 상세 조항이 펼쳐집니다.</b> <span class="강조">입장 시 모든 규정에 동의한 것으로 간주합니다.</span>
     </div>
 
-    <!-- 제1조 운영 정책 및 회원의 의무 -->
+    <!-- 제1조 운영 권한 -->
     <div class="규정-섹션" id="art1">
-        <div class="섹션-헤더">제1조 운영 정책 및 참여자의 의무</div>
+        <div class="섹션-헤더">제1조 (운영 권한)</div>
         
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">01</span> 운영 정책의 목적 및 변경 권한</h3>
+                <h3><span class="강조">01</span> 관리자의 포괄적 집행권 및 재량</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 본 정책은 더 스파이크 크로스 소통방의 원활한 운영 및 쾌적한 환경 조성을 목적으로 한다.
-2. 정책은 카페 내 및 소통방 내 모든 메시지, 사진, 영상 등에 적용된다.
-3. 운영진은 별도의 통보 없이 본 정책을 추가/수정/삭제할 수 있으며 변경 즉시 효력이 발생한다.</div>
+                <div class="상세-본문">1. 본 규정의 해석 및 집행 권한은 방장 및 부방장(이하 운영진)에게 있다.
+2. 규정에 명시되지 않은 사항이라도 채팅방의 존립 목적이나 질서를 저해한다고 판단될 경우 <span class="강조">운영진의 재량으로 통보 없이 제재(삭제, 강퇴)</span>할 수 있다.
+3. 운영진은 원활한 운영을 위해 본 정책을 언제든 추가/수정/삭제할 수 있으며 변경 즉시 효력이 발생한다.</div>
             </div>
         </div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">02</span> 참여자의 숙지 의무</h3>
+                <h3><span class="강조">02</span> 무관용 원칙 및 우회 행위 처벌</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 회원은 변경된 공지 내용을 주기적으로 숙지해야 하며, <span class="강조">공지 미숙지로 인해 발생한 불편함이나 제재에 대해서는 운영진이 도움을 드릴 수 없다.</span></div>
+                <div class="상세-본문">1. <span class="강조">“규정을 몰랐다”는 면책 사유가 되지 않는다.</span> 공지 숙지 책임은 회원 본인에게 있다.
+2. 규정의 문구상 허점을 찾아 교묘하게 악용하거나 분란을 조장하는 행위는 본 규정 위반보다 엄중히 처벌한다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 공개 항의 금지 (행정 절차)</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 운영진의 제재나 운영 방식에 대한 이의 제기는 반드시 <span class="강조">1:1 채팅</span>을 통해서만 가능하다.
+2. 공개적인 채팅방에서의 항의, 선동, 비하 행위는 즉시 강제 퇴장 사유가 된다.</div>
             </div>
         </div>
     </div>
 
-    <!-- 제2조 관리자의 역할 -->
+    <!-- 제2조 소통 매너 -->
     <div class="규정-섹션" id="art2">
-        <div class="섹션-헤더">제2조 관리자의 역할 및 권한</div>
+        <div class="섹션-헤더">제2조 (기본 매너 및 소통 가이드라인)</div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">01</span> 질서 유지 및 제재 권한</h3>
+                <h3><span class="강조">01</span> 언어 사용 및 상호 존중</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 관리자(방장 및 부방장)는 운영 정책을 기반으로 쾌적한 환경 조성을 위해 활동한다.
-2. 원활한 운영을 위해 정책 위반 메시지를 <span class="강조">통보 없이 삭제</span>할 수 있으며, 위반 사용자의 이용을 <span class="강조">통보 없이 제한(내보내기)</span> 할 전권을 가진다.</div>
+                <div class="상세-본문">1. 존댓말 사용을 원칙으로 하며 비꼬기, 반말, 공격적인 어조, 하대하는 태도를 엄격히 금한다.
+2. 욕설이 포함되지 않았더라도 맥락상 상대를 모욕하거나 조롱할 의도가 다분한 경우 운영진 판단하에 제재한다.</div>
             </div>
         </div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">02</span> 문의 응대 원칙</h3>
+                <h3><span class="강조">02</span> 친목질 및 텃세 금지</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 관리자는 운영의 공평성을 위해 개인적인 1:1 대화, 메일 등을 통한 사적인 게임 문의에 답변하지 않는다.
-2. 게임 관련 문의는 반드시 공식 카페 게시판 혹은 공식 고객센터 메일(support@suncyan.com)을 이용해야 한다.</div>
+                <div class="상세-본문">1. 특정 인원 간의 닉네임 언급, 사적인 대화 지속으로 타인의 참여를 배제하는 '친목 행위'를 금한다.
+2. 신규 유입 인원에 대한 무시, 텃세, 배척 행위는 커뮤니티 파괴 행위로 간주하여 엄중히 다룬다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 사생활(TMI) 및 분위기 저해 통제</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 게임과 무관한 개인 신상(나이, 학교, 실명 등)의 공개 및 질문을 금한다.
+2. 개인의 우울함, 불행 호소, 과도한 일상 이야기로 채팅방 분위기를 다운시키거나 위로를 강요하는 행위를 금한다.</div>
             </div>
         </div>
     </div>
 
-    <!-- 제3조 개인정보 및 보호 -->
+    <!-- 제3조 금지 행위 (중요: 모든 거래 금지) -->
     <div class="규정-섹션" id="art3">
-        <div class="섹션-헤더">제3조 개인정보 관리 및 피해 구제</div>
+        <div class="섹션-헤더">제3조 (중대 금지 행위 및 제재 기준)</div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">01</span> 본인 책임의 원칙</h3>
+                <h3><span class="강조">01</span> 모든 형태의 거래 행위 절대 금지</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 계정 및 프로필 관리 책임은 일차적으로 본인에게 있으며, 부주의로 발생한 피해(계정 탈취 등)에 대해 운영진은 책임을 지지 않는다.
-2. <span class="강조">계정 공유, 양도, 아이템 현금 거래</span> 등으로 발생하는 모든 피해의 결과는 본인에게 있다.</div>
+                <div class="상세-본문">1. <span class="강조">계정 거래, 대리 플레이, 유료 재화 대리 결제, 기프트카드 교환 등 모든 거래를 절대 금지한다.</span>
+2. 위 항목과 관련된 모든 영리 목적의 행위 및 '단순 언급', '가격 문의' 또한 즉시 제재 대상이다.
+3. 개인 간 거래로 발생한 사기 피해는 관리자가 도움을 줄 수 없으며, 모든 책임은 본인에게 있다.</div>
             </div>
         </div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">02</span> 사기 피해 예방</h3>
+                <h3><span class="강조">02</span> 기만(비틱) 및 분쟁 조장</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 개인 간에 발생한 재화/계정 사기 문제에 대해 관리자가 개입하거나 도움을 드리기 어렵다.
-2. 운영진은 특수 상황(이벤트 등) 외에는 절대 개인정보를 요구하지 않으므로 사칭 행위에 주의해야 한다.</div>
+                <div class="상세-본문">1. 기만(비틱): 질문을 가장하여 자신의 행운을 과시하거나 타인에게 박탈감을 주는 행위를 금한다.
+2. 갈라치기: 타 게임/커뮤니티 비교, 특정 캐릭터 비하로 싸움을 붙이는 행위를 금한다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 홍보, 도배 및 부적절 콘텐츠</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 홍보: 타 오픈채팅방, 유튜브, 디스코드 등의 링크 게시 및 유도 행위 금지.
+2. 도배: 의미 없는 자음, 이모티콘 연속 게시(3회 이상), 장문의 복사 붙여넣기 금지.
+3. 유해물: 음란물, 공포/혐오 이미지, 불법 프로그램(핵) 정보 공유 시 <span class="강조">경고 없이 영구 강퇴</span>한다.</div>
             </div>
         </div>
     </div>
 
-    <!-- 제4조 핵심 위반 사항 -->
+    <!-- 제4조 정보 규정 -->
     <div class="규정-섹션" id="art4">
-        <div class="섹션-헤더">제4조 핵심 위반 사항 및 제재 기준</div>
+        <div class="섹션-헤더">제4조 (정보 공유 및 질문 규정)</div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">01</span> 소통 예절 및 친목 금지</h3>
+                <h3><span class="강조">01</span> 질문 전 검색 및 허위 사실 유포 금지</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 상호 존댓말 준수: 욕설뿐 아니라 비꼬기, 반말, 하대 등 불쾌감을 주는 말투 금지.
-2. 친목 및 배척: 특정 유저 호출 및 사적 대화로 신규 유저를 소외시키는 '텃세' 행위 엄격 금지.
-3. 분위기 저해: 과도한 개인사 공개(TMI) 및 위로 강요 행위 금지.</div>
+                <div class="상세-본문">1. 반복적 질문 방지를 위해 공지사항 및 게임 내 도움말 확인을 우선 권장한다.
+2. 검증되지 않은 개인의 추측(뇌피셜)을 공식 정보인 것처럼 유포하여 혼란을 주는 행위를 금한다.</div>
             </div>
         </div>
 
         <div class="항-그룹">
             <div class="항-클릭" onclick="toggle항(this)">
-                <h3><span class="강조">02</span> 기만 및 불법 프로그램</h3>
+                <h3><span class="강조">02</span> 스포일러 방지</h3>
                 <span class="아이콘">▼</span>
             </div>
             <div class="항-상세">
-                <div class="상세-본문">1. 기만(비틱): 질문을 가장한 자랑 행위 및 타인의 실패 조롱 금지.
-2. 불법 프로그램: 핵, 매크로 정보 공유 및 옹호 시 <span class="강조">경고 없이 영구 강퇴</span>.
-3. 허위 사실 유포: 확인되지 않은 뇌피셜로 혼란 야기 시 제재.</div>
+                <div class="상세-본문">1. 스토리 등 민감한 내용은 반드시 사전 경고 문구를 사용하거나 언급을 자제하여 타인의 게임 경험을 존중해야 한다.</div>
             </div>
         </div>
     </div>
 
-    <a href="https://discord.gg/J8he2mUFQC" class="디스코드-버튼"> 디스코드 서버 바로가기</a>
+    <!-- 제5조 개인정보 및 기타 -->
+    <div class="규정-섹션" id="art5">
+        <div class="섹션-헤더">제5조 (개인정보 및 기타 안전 수칙)</div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 계정 보호 및 본인 책임</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 계정 관리 책임은 본인에게 있으며, 부주의로 인한 피해는 운영진이 도와줄 수 없다.
+2. 관리자 사칭 주의: 운영진은 사전에 지정된 이벤트 보상 발송 외에 절대 사적으로 개인정보를 요구하지 않는다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 프로필 및 닉네임 규정</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 반드시 식별 가능한 닉네임을 설정해야 하며, 운영진의 변경 요청에 불응 시 퇴장 조치한다.
+2. 사회 통념상 부적절한 닉네임이나 프로필 사진 사용 시 제재 대상이다.</div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://discord.gg/J8he2mUFQC" class="디스코드-버튼">🎮 공식 디스코드 서버 입장하기</a>
 
     <div class="개정-기록">
-        <strong>규정 개정 히스토리</strong><br>
-        • 2026.01.06 : 대충 개편<br>
-        • 2025.12.05 : 관리자 재량권 및 거래 금지 <br>
+        <strong>📜 규정 개정 및 연혁</strong><br>
+        • 2026.01.06 : [최종 통합] 모든 거래 절대 금지 조항 및 카페 운영 정책 반영<br>
+        • 2025.12.05 : 규정 대규모 개정 (운영 권한 및 우회 처벌 강화)<br>
         • 2025.10.26 : 사생활 관련 조항 추가<br>
+        • 2025.10.22 : 주의 사항 목록 추가<br>
+        • 2025.10.02 : 가독성 개편 및 금지 사항 구체화<br>
+        • 2025.08.17 : 규칙 수정<br>
         • 2025.06.28 : 최초 규정 수립
     </div>
 
     <footer>
         Copyright 2026. 더 스파이크 크로스 소통방 all rights reserved.<br>
-        모든 운영 권한은 소통방 관리진에게 귀속됩니다.
+        본 운영 규정은 방의 질서와 화합을 위해 설계되었습니다.
     </footer>
 </div>
 
 <script>
-    // 아코디언 기능
     function toggle항(header) {
         header.classList.toggle('active');
         const content = header.nextElementSibling;
@@ -362,23 +424,20 @@
         }
     }
 
-    // 테마 전환 기능
     function toggleTheme() {
         const body = document.body;
         const btn = document.getElementById('themeBtn');
-        
         if (body.classList.contains('light-mode')) {
             body.classList.remove('light-mode');
-            btn.innerText = '☀️'; // 다크모드일 때 해 아이콘
+            btn.innerText = '☀️';
             localStorage.setItem('theme', 'dark');
         } else {
             body.classList.add('light-mode');
-            btn.innerText = '🌙'; // 라이트모드일 때 달 아이콘
+            btn.innerText = '🌙';
             localStorage.setItem('theme', 'light');
         }
     }
 
-    // 페이지 로드 시 저장된 테마 적용
     window.onload = () => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
