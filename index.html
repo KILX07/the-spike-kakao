@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>더 스파이크 크로스 소통방 규정</title>
+    <title>더 스파이크 크로스 통합 규정</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
@@ -15,8 +15,7 @@
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --border: #334155;
-            --accent: #00fff0; /* Crimson Red */
-            --point: #00fff0; /* Cyan */
+            --accent: #00fff0;
             --toc-bg: #1e293b;
             --toc-text: #f8fafc;
             --inner-bg: #0f172a;
@@ -30,8 +29,7 @@
             --text-main: #1e293b;
             --text-sub: #475569;
             --border: #e2e8f0;
-            --accent: #be123c;
-            --point: #0369a1;
+            --accent: #006eff;
             --toc-bg: #ffffff;
             --toc-text: #0f172a;
             --inner-bg: #f8fafc;
@@ -58,20 +56,20 @@
             border-bottom: 5px solid var(--accent);
         }
 
-        header h1 { margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-        header p { margin: 15px 0 0; font-size: 16px; opacity: 0.8; font-weight: 300; }
+        header h1 { margin: 0; font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+        header p { margin: 15px 0 0; font-size: 15px; opacity: 0.8; font-weight: 300; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .컨테이너 { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
         /* 목차 영역 */
-        .toc-nav {
+        .목차-네비 {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             margin-top: -80px;
             margin-bottom: 50px;
         }
-        .toc-link {
+        .목차-링크 {
             background: var(--toc-bg);
             border: 1px solid var(--border);
             padding: 20px 5px;
@@ -84,9 +82,9 @@
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
             transition: 0.2s;
         }
-        .toc-link:hover { transform: translateY(-5px); background: var(--point); color: #000; }
+        .목차-링크:hover { transform: translateY(-5px); background: var(--accent); color: white; }
 
-        .notice-top {
+        .상단-공지 {
             background: var(--bg-card);
             padding: 25px;
             border-radius: 15px;
@@ -96,30 +94,29 @@
             font-size: 15px;
         }
 
-        /* 규정 섹션 카드 */
-        .rule-section {
+        /* 규정 섹션 */
+        .규정-섹션 {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
-        .section-header {
-            background: rgba(0,0,0,0.15);
+        .섹션-헤더 {
+            background: rgba(0,0,0,0.1);
             padding: 20px 30px;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 900;
-            color: var(--point);
+            color: var(--accent);
             border-bottom: 1px solid var(--border);
         }
 
-        /* 개별 항 아코디언 스타일 */
-        .clause-group { border-bottom: 1px solid var(--border); }
-        .clause-group:last-child { border-bottom: none; }
+        .항-그룹 { border-bottom: 1px solid var(--border); }
+        .항-그룹:last-child { border-bottom: none; }
 
-        .clause-header {
+        .항-클릭 {
             padding: 20px 30px;
             cursor: pointer;
             display: flex;
@@ -127,29 +124,28 @@
             align-items: center;
             transition: background 0.2s;
         }
-        .clause-header:hover { background: rgba(255,255,255,0.05); }
-        .clause-header h3 { margin: 0; font-size: 17px; font-weight: 700; }
-        .clause-header.active .icon { transform: rotate(180deg); color: var(--accent); }
-        .icon { font-size: 10px; color: var(--text-sub); transition: 0.3s; }
+        .항-클릭:hover { background: rgba(255,255,255,0.05); }
+        .항-클릭 h3 { margin: 0; font-size: 17px; font-weight: 700; }
+        .항-클릭.active .아이콘 { transform: rotate(180deg); color: var(--accent); }
+        .아이콘 { font-size: 10px; color: var(--text-sub); transition: 0.3s; }
 
-        .clause-body {
+        .항-상세 {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
             background: var(--inner-bg);
         }
-        .clause-content {
+        .상세-본문 {
             padding: 25px 40px;
             font-size: 14.5px;
             color: var(--text-sub);
             border-top: 1px dashed var(--border);
             white-space: pre-wrap;
-            border-left: 4px solid var(--accent);
-            margin: 0 30px 25px;
+            border-left: 3px solid var(--accent);
+            margin: 0 30px 20px;
         }
 
-        .highlight { color: var(--accent); font-weight: 800; text-decoration: underline; }
-        .num { color: var(--point); font-weight: 900; margin-right: 10px; }
+        .강조 { color: var(--accent); font-weight: 800; text-decoration: underline; }
 
         /* 테마 토글 버튼 */
         .theme-toggle {
@@ -159,7 +155,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: var(--point);
+            background: var(--accent);
             color: #000;
             border: none;
             cursor: pointer;
@@ -169,13 +165,13 @@
             align-items: center;
             font-size: 24px;
             z-index: 1000;
-            transition: 0.2s;
+            transition: transform 0.2s;
         }
         .theme-toggle:active { transform: scale(0.9); }
 
-        .discord-btn {
+        .디스코드-버튼 {
             display: block;
-            background: var(--point);
+            background: var(--accent);
             color: #000;
             text-align: center;
             padding: 22px;
@@ -187,7 +183,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .history-log {
+        .개정-기록 {
             background: var(--bg-card);
             padding: 30px;
             border-radius: 15px;
@@ -200,10 +196,9 @@
         footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 13px; }
 
         @media (max-width: 850px) {
-            .toc-nav { grid-template-columns: repeat(2, 1fr); }
-            .toc-link:last-child { grid-column: span 2; }
-            .clause-content { padding: 20px; margin: 0 15px 20px; }
-            header { padding: 60px 20px; }
+            .목차-네비 { grid-template-columns: repeat(2, 1fr); }
+            .목차-링크:last-child { grid-column: span 2; }
+            .상세-본문 { padding: 20px; margin: 0 15px 15px; }
         }
     </style>
 </head>
@@ -212,231 +207,223 @@
 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
 
 <header>
-    <h1>더 스파이크 크로스 소통방 규정</h1>
-    <p>[최종 개정판] 쾌적한 환경 유지 및 분쟁 예방을 위한 소통 가이드</p>
+    <h1>더 스파이크 크로스 통합 규정</h1>
+    <p>[더 스파이크 크로스 소통방] 공식 운영 규정 (통합 개정판)</p>
 </header>
 
-<div class="container">
-    <nav class="toc-nav">
-        <a href="#art1" class="toc-link">제1조 집행권한</a>
-        <a href="#art2" class="toc-link">제2조 소통매너</a>
-        <a href="#art3" class="toc-link">제3조 금지사항</a>
-        <a href="#art4" class="toc-link">제4조 정보공유</a>
-        <a href="#art5" class="toc-link">제5조 안전규정</a>
+<div class="컨테이너">
+    <nav class="목차-네비">
+        <a href="#art1" class="목차-링크">운영 권한</a>
+        <a href="#art2" class="목차-링크">소통 매너</a>
+        <a href="#art3" class="목차-링크">거래/행위 금지</a>
+        <a href="#art4" class="목차-링크">정보 및 질문</a>
+        <a href="#art5" class="목차-링크">안전 및 기타</a>
     </nav>
 
-    <div class="notice-top">
-        <b>💡 필독 안내:</b> 본 규정은 참여하는 모든 인원이 본 규정에 동의한 것으로 간주합니다. <b>항목을 클릭하여 세부 규정을 반드시 숙지하십시오.</b> <span class="highlight">"몰랐다"는 면책 사유가 되지 않습니다.</span>
+    <div class="상단-공지">
+        <b>통합 규정 안내:</b> 본 규정은 채팅방의 규모 확대에 따라 쾌적한 환경을 유지하고 분쟁을 예방하기 위해 수립되었습니다. <b>항목 클릭 시 상세 조항이 펼쳐집니다.</b> <span class="강조">입장 시 모든 규정에 동의한 것으로 간주합니다.</span>
     </div>
 
     <!-- 제1조 운영 권한 -->
-    <div class="rule-section" id="art1">
-        <div class="section-header">제1조 (운영 권한 및 행정 집행)</div>
+    <div class="규정-섹션" id="art1">
+        <div class="섹션-헤더">제1조 (운영 권한)</div>
         
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 관리자의 포괄적 재량 및 최종 권한</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 관리자의 포괄적 집행권 및 재량</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">본 규정의 최종 해석 및 집행 권한은 방장 및 부방장(운영진)에게 귀속됩니다.
-규정에 명시되지 않은 사항이라도 채팅방의 질서를 저해한다고 판단될 경우, <span class="highlight">운영진은 행정적 재량권을 발동하여 즉시 제재(경고, 퇴장, 영구 차단)를 가할 수 있습니다.</span>
-운영진의 조치는 규정 문구보다 우선하는 절대적 효력을 가지며, 관리자의 정당한 조치에 대해 '주관적이다'라고 항의하는 행위는 가중 처벌 대상입니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 무관용 원칙 및 규정 우회 엄금</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">“규정을 몰랐다”는 사실은 면책 사유가 되지 않으며, 공지 확인 의무는 전적으로 유저 본인에게 있습니다.
-규정의 허점을 찾아 교묘하게 분란을 유도하거나 타 유저를 불쾌하게 하는 <span class="highlight">‘규정 우회 행위’는 본 규정 위반보다 엄중히 처벌</span>합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 본 규정의 해석 및 집행 권한은 방장 및 부방장(이하 운영진)에게 있다.
+2. 규정에 명시되지 않은 사항이라도 채팅방의 존립 목적이나 질서를 저해한다고 판단될 경우 <span class="강조">운영진의 재량으로 통보 없이 제재(삭제, 강퇴)</span>할 수 있다.
+3. 운영진은 원활한 운영을 위해 본 정책을 언제든 추가/수정/삭제할 수 있으며 변경 즉시 효력이 발생한다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 공개 항의 금지 및 문의 절차</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 무관용 원칙 및 우회 행위 처벌</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">운영진의 제재나 운영 방식에 대한 이의 제기는 반드시 <span class="highlight">1:1 채팅</span>을 통해서만 가능합니다.
-공개 채팅방에서의 선동, 항의, 관리자 비하 등은 발견 즉시 강제 퇴장 사유가 됩니다. 본 방은 민주적 토론장이 아닌 관리형 소통 공간입니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. <span class="강조">“규정을 몰랐다”는 면책 사유가 되지 않는다.</span> 공지 숙지 책임은 회원 본인에게 있다.
+2. 규정의 문구상 허점을 찾아 교묘하게 악용하거나 분란을 조장하는 행위는 본 규정 위반보다 엄중히 처벌한다.</div>
+            </div>
+        </div>
+
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 공개 항의 금지 (행정 절차)</h3>
+                <span class="아이콘">▼</span>
+            </div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 운영진의 제재나 운영 방식에 대한 이의 제기는 반드시 <span class="강조">1:1 채팅</span>을 통해서만 가능하다.
+2. 공개적인 채팅방에서의 항의, 선동, 비하 행위는 즉시 강제 퇴장 사유가 된다.</div>
             </div>
         </div>
     </div>
 
     <!-- 제2조 소통 매너 -->
-    <div class="rule-section" id="art2">
-        <div class="section-header">제2조 (기본 매너 및 소통 가이드라인)</div>
+    <div class="규정-섹션" id="art2">
+        <div class="섹션-헤더">제2조 (기본 매너 및 소통 가이드라인)</div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 언어 사용 및 맥락적 제재 기준</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 언어 사용 및 상호 존중</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[존댓말 원칙] 모든 대화는 상호 존댓말 사용을 원칙으로 하며 비꼬기, 반말, 공격적인 어조, 하대하는 태도를 일절 금합니다.
-[맥락적 제재] 직접적인 욕설이 없더라도, <span class="highlight">운영진이 판단하기에 상대를 모욕, 조롱, 기만할 의도가 다분하거나 분위기를 험악하게 만든다고 간주될 경우</span> 즉시 제재합니다. 초성 욕설이나 단어 변형을 통한 우회 표현도 동일하게 엄단합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 존댓말 사용을 원칙으로 하며 비꼬기, 반말, 공격적인 어조, 하대하는 태도를 엄격히 금한다.
+2. 욕설이 포함되지 않았더라도 맥락상 상대를 모욕하거나 조롱할 의도가 다분한 경우 운영진 판단하에 제재한다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 친목질 및 집단 배척(텃세) 금지</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 친목질 및 텃세 금지</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[대화 독점 금지] 특정 인원 간의 닉네임 언급, 사적인 과거 회상 등 폐쇄적인 대화로 타인의 참여를 배제하는 행위를 금합니다.
-[네임드화 금지] 특정 유저를 추종하거나 추켜세워 방 내에 서열이 존재하는 듯한 분위기를 조성하는 행위를 금합니다.
-[텃세 엄단] 신규 유입 인원에 대한 고의적 무시나 답변 거부는 <span class="highlight">'방 파괴 행위'</span>로 간주하여 가장 엄중히 처벌합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 특정 인원 간의 닉네임 언급, 사적인 대화 지속으로 타인의 참여를 배제하는 '친목 행위'를 금한다.
+2. 신규 유입 인원에 대한 무시, 텃세, 배척 행위는 커뮤니티 파괴 행위로 간주하여 엄중히 다룬다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 사생활 보호 및 상호 존중
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 사생활(TMI) 및 분위기 저해 통제</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[개인정보] 본인 및 타인의 신상(나이, 학교, 실명 등)을 공개하거나 묻는 행위를 엄금합니다.
-[감정 과잉 통제] 본 소통방은 정보 공유가 목적이며, 멤버 개개인의 우울함이나 사적인 불만을 받아주는 <span class="highlight">'감정 쓰레기통'</span>이 아닙니다. 타인에게 위로를 강요하거나 분위기를 저해할 경우 제지됩니다.
-[주제 제한] 정치, 종교, 젠더, 지역 비하 등 사회적 갈등 소지가 있는 주제 언급을 금합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 게임과 무관한 개인 신상(나이, 학교, 실명 등)의 공개 및 질문을 금한다.
+2. 개인의 우울함, 불행 호소, 과도한 일상 이야기로 채팅방 분위기를 다운시키거나 위로를 강요하는 행위를 금한다.</div>
             </div>
         </div>
     </div>
 
-    <!-- 제3조 금지 행위 -->
-    <div class="rule-section" id="art3">
-        <div class="section-header">제3조 (금지 행위 및 제재 기준)</div>
+    <!-- 제3조 금지 행위 (중요: 모든 거래 금지) -->
+    <div class="규정-섹션" id="art3">
+        <div class="섹션-헤더">제3조 (중대 금지 행위 및 제재 기준)</div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 모든 형태의 거래 및 대리 행위 (절대 금지)</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 모든 형태의 거래 행위 절대 금지</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[금지 범위] 계정 거래(판매, 구매, 대여), 대리 결제, 기프트카드 교환 등 상업적 행위를 절대 금지합니다.
-[대리 플레이] 금전적 대가 여부와 관계없이 <span class="highlight">뽑기 대리, 이벤트 대리 등 계정을 맡기는 모든 행위</span>를 보안 및 사기 예방을 위해 엄격히 금합니다.
-[언급 제재] 거래 시도, 단순 언급, 시세 문의만으로도 경고 없이 즉시 강제 퇴장될 수 있습니다. "장난이었다", "떠보려고 했다"는 변명은 인정되지 않습니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. <span class="강조">계정 거래, 대리 플레이, 유료 재화 대리 결제, 기프트카드 교환 등 모든 거래를 절대 금지한다.</span>
+2. 위 항목과 관련된 모든 영리 목적의 행위 및 '단순 언급', '가격 문의' 또한 즉시 제재 대상이다.
+3. 개인 간 거래로 발생한 사기 피해는 관리자가 도움을 줄 수 없으며, 모든 책임은 본인에게 있다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 기만(비틱) 및 악성 분쟁 조장</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 기만(비틱) 및 분쟁 조장</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[기만 정의] 본인의 결과물이 좋은 것임을 인지하면서도 "이거 좋은 건가요?"라며 질문을 가장하여 자랑하는 행위를 엄금합니다.
-[불운 코스프레] 충분히 좋은 결과를 얻고도 "원하는 게 아니네요" 식의 기만질은 즉시 제재 대상입니다.
-[판단 권한] <span class="highlight">특정 발언이 기만인지 아닌지에 대한 최종 판단 권한은 전적으로 운영진의 주관적 재량</span>에 있습니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 기만(비틱): 질문을 가장하여 자신의 행운을 과시하거나 타인에게 박탈감을 주는 행위를 금한다.
+2. 갈라치기: 타 게임/커뮤니티 비교, 특정 캐릭터 비하로 싸움을 붙이는 행위를 금한다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 홍보, 도배 및 부정 행위 옹호</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">03</span> 홍보, 도배 및 부적절 콘텐츠</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[외부 유입] 타 오픈채팅방, 디스코드, 유튜브 등의 링크 게시 및 멤버 유도 행위는 즉시 퇴장 사유입니다.
-[도배] 이모티콘 3회 이상 연사, 무의미한 자음 남발, 잦은 입퇴장으로 알림 공해를 유발하는 행위를 금합니다.
-[핵/매크로] 부정 행위 프로그램의 정보 공유 및 이를 사용한 <span class="highlight">인증이나 옹호 발언 시 경고 없이 영구 차단</span>합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 홍보: 타 오픈채팅방, 유튜브, 디스코드 등의 링크 게시 및 유도 행위 금지.
+2. 도배: 의미 없는 자음, 이모티콘 연속 게시(3회 이상), 장문의 복사 붙여넣기 금지.
+3. 유해물: 음란물, 공포/혐오 이미지, 불법 프로그램(핵) 정보 공유 시 <span class="강조">경고 없이 영구 강퇴</span>한다.</div>
             </div>
         </div>
     </div>
 
     <!-- 제4조 정보 규정 -->
-    <div class="rule-section" id="art4">
-        <div class="section-header">제4조 (정보 공유 및 질문 규정)</div>
+    <div class="규정-섹션" id="art4">
+        <div class="섹션-헤더">제4조 (정보 공유 및 질문 규정)</div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 질문 전 검색 및 답변 예절</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 질문 전 검색 및 허위 사실 유포 금지</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[검색 의무] 질문 전 공지사항, 공식카페, 이전 대화 검색을 반드시 선행하십시오. 반복 질문은 제재 대상입니다.
-[답변 강요 금지] 질문은 자유이나 답변은 의무가 아닙니다. 답변이 없다고 재촉하거나 화를 내는 행위는 비매너 조항으로 처벌됩니다.
-[허위 사실] 확인되지 않은 루머나 뇌피셜을 공식 정보처럼 유포하여 혼란을 주는 행위를 금합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 반복적 질문 방지를 위해 공지사항 및 게임 내 도움말 확인을 우선 권장한다.
+2. 검증되지 않은 개인의 추측(뇌피셜)을 공식 정보인 것처럼 유포하여 혼란을 주는 행위를 금한다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 스포일러 및 유출 정보 통제</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 스포일러 방지</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[스포 표기] 신규 스토리 및 캐릭터 연출 언급 시 반드시 '스포주의' 문구와 <span class="highlight">충분한 공백(미리보기 방지)</span>을 두어야 합니다.
-[유출본] 정식 업데이트 전 데이터 마이닝 등을 통해 얻은 비공개 정보(유출본) 공유 시 즉시 영구 강제 퇴장 처리됩니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 스토리 등 민감한 내용은 반드시 사전 경고 문구를 사용하거나 언급을 자제하여 타인의 게임 경험을 존중해야 한다.</div>
             </div>
         </div>
     </div>
 
-    <!-- 제5조 안전 및 프로필 -->
-    <div class="rule-section" id="art5">
-        <div class="section-header">제5조 (안전 관리 및 프로필 규정)</div>
+    <!-- 제5조 개인정보 및 기타 -->
+    <div class="규정-섹션" id="art5">
+        <div class="섹션-헤더">제5조 (개인정보 및 기타 안전 수칙)</div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 운영진 사칭 금지 및 본인 책임</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">01</span> 계정 보호 및 본인 책임</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[계정 보안] 계정 공유나 관리 소홀로 발생한 사기 피해는 운영진이 해결해 드리지 않습니다.
-[사칭 엄단] 운영진을 사칭하여 개인정보나 계정을 요구하는 행위는 발견 즉시 차단 및 신고합니다. 운영진은 절대 사적으로 유저의 비밀번호를 묻지 않습니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 계정 관리 책임은 본인에게 있으며, 부주의로 인한 피해는 운영진이 도와줄 수 없다.
+2. 관리자 사칭 주의: 운영진은 사전에 지정된 이벤트 보상 발송 외에 절대 사적으로 개인정보를 요구하지 않는다.</div>
             </div>
         </div>
 
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 프로필 및 닉네임 규정</h3>
-                <span class="icon">▼</span>
+        <div class="항-그룹">
+            <div class="항-클릭" onclick="toggle항(this)">
+                <h3><span class="강조">02</span> 프로필 및 닉네임 규정</h3>
+                <span class="아이콘">▼</span>
             </div>
-            <div class="clause-body">
-                <div class="clause-content">[식별 가능성] 공백 닉네임, 중복 닉네임 등 관리자가 구분하기 힘든 설정은 금지됩니다.
-[적절성] 욕설, 비하, 성적인 의미가 담긴 닉네임이나 프로필 사진 사용 시 운영진의 변경 요청에 즉시 응해야 하며, 불응 시 예고 없이 퇴장 조치합니다.</div>
+            <div class="항-상세">
+                <div class="상세-본문">1. 반드시 식별 가능한 닉네임을 설정해야 하며, 운영진의 변경 요청에 불응 시 퇴장 조치한다.
+2. 사회 통념상 부적절한 닉네임이나 프로필 사진 사용 시 제재 대상이다.</div>
             </div>
         </div>
     </div>
 
-    <a href="https://discord.gg/J8he2mUFQC" class="discord-btn">⚖️ 더 스파이크 크로스 소통방 디스코드 바로가기</a>
+    <a href="https://discord.gg/J8he2mUFQC" class="디스코드-버튼">🎮 공식 디스코드 서버 입장하기</a>
 
-    <div class="history-log">
-        <strong>📜 규정 개정 및 업데이트 로그</strong><br>
-        • 2026.01.06 : 거래/대리 무관용 원칙 강화<br>
-        • 2025.12.05 : 규정 대규모 개정 (관리자 재량권 확립 및 우회 처벌)<br>
-        • 2025.10.26 : 사생활(TMI) 및 감정 과잉 통제 조항 신설<br>
-        • 2025.10.22 : 주의 사항 목록 규칙 추가<br>
-        • 2025.10.02 : 비틱(기만) 및 갈라치기 정의 구체화<br>
-        • 2025.08.17 : 최초 규정 수정 및 보강<br>
-        • 2025.06.28 : 규정 최초 수립
+    <div class="개정-기록">
+        <strong>📜 규정 개정 및 연혁</strong><br>
+        • 2026.01.06 : 규정 사이트화<br>
+        • 2025.12.05 : 규정 대규모 개정 (운영 권한 및 우회 처벌 강화)<br>
+        • 2025.10.26 : 사생활 관련 조항 추가<br>
+        • 2025.10.22 : 주의 사항 목록 추가<br>
+        • 2025.10.02 : 가독성 개편 및 금지 사항 구체화<br>
+        • 2025.08.17 : 규칙 수정<br>
+        • 2025.06.28 : 최초 규정 수립
     </div>
 
     <footer>
-        ©  Copyright 2026. 더 스파이크 크로스 소통방 all rights reserved.<br>
+        Copyright 2026. 더 스파이크 크로스 소통방 all rights reserved.<br>
         본 운영 규정은 방의 질서와 화합을 위해 설계되었습니다.
     </footer>
 </div>
 
 <script>
-    // 아코디언 토글 기능
-    function toggleClause(header) {
+    function toggle항(header) {
         header.classList.toggle('active');
-        const body = header.nextElementSibling;
-        if (body.style.maxHeight && body.style.maxHeight !== "0px") {
-            body.style.maxHeight = "0px";
+        const content = header.nextElementSibling;
+        if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+            content.style.maxHeight = "0px";
         } else {
-            // 충분한 공간 확보를 위해 scrollHeight 사용
-            body.style.maxHeight = body.scrollHeight + 100 + "px";
+            content.style.maxHeight = content.scrollHeight + 100 + "px";
         }
     }
 
-    // 테마 전환 기능
     function toggleTheme() {
         const body = document.body;
         const btn = document.getElementById('themeBtn');
@@ -451,471 +438,6 @@
         }
     }
 
-    // 페이지 로드 시 테마 설정
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-            document.getElementById('themeBtn').innerText = '🌙';
-        }
-    }
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>더 스파이크 크로스 소통방 규정</title>
-    <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
-        /* CSS 변수 설정 (다크모드 기본값) */
-        :root {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --bg-header: #020617;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --border: #334155;
-            --accent: #e11d48; /* Crimson Red */
-            --point: #00fff0; /* Cyan */
-            --toc-bg: #1e293b;
-            --toc-text: #f8fafc;
-            --inner-bg: #0f172a;
-        }
-
-        /* 라이트모드 변수 */
-        body.light-mode {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --bg-header: #0f172a;
-            --text-main: #1e293b;
-            --text-sub: #475569;
-            --border: #e2e8f0;
-            --accent: #be123c;
-            --point: #0369a1;
-            --toc-bg: #ffffff;
-            --toc-text: #0f172a;
-            --inner-bg: #f8fafc;
-        }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        header {
-            background: var(--bg-header);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-        }
-
-        header h1 { margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-        header p { margin: 15px 0 0; font-size: 16px; opacity: 0.8; font-weight: 300; }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-
-        /* 목차 영역 */
-        .toc-nav {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-top: -80px;
-            margin-bottom: 50px;
-        }
-        .toc-link {
-            background: var(--toc-bg);
-            border: 1px solid var(--border);
-            padding: 20px 5px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--toc-text);
-            font-weight: 800;
-            font-size: 13.5px;
-            border-radius: 15px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-            transition: 0.2s;
-        }
-        .toc-link:hover { transform: translateY(-5px); background: var(--point); color: #000; }
-
-        .notice-top {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border-left: 6px solid var(--accent);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            font-size: 15px;
-        }
-
-        /* 규정 섹션 카드 */
-        .rule-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            margin-bottom: 35px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-
-        .section-header {
-            background: rgba(0,0,0,0.15);
-            padding: 20px 30px;
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--point);
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* 개별 항 아코디언 스타일 */
-        .clause-group { border-bottom: 1px solid var(--border); }
-        .clause-group:last-child { border-bottom: none; }
-
-        .clause-header {
-            padding: 20px 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-        .clause-header:hover { background: rgba(255,255,255,0.05); }
-        .clause-header h3 { margin: 0; font-size: 17px; font-weight: 700; }
-        .clause-header.active .icon { transform: rotate(180deg); color: var(--accent); }
-        .icon { font-size: 10px; color: var(--text-sub); transition: 0.3s; }
-
-        .clause-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-            background: var(--inner-bg);
-        }
-        .clause-content {
-            padding: 25px 40px;
-            font-size: 14.5px;
-            color: var(--text-sub);
-            border-top: 1px dashed var(--border);
-            white-space: pre-wrap;
-            border-left: 4px solid var(--accent);
-            margin: 0 30px 25px;
-        }
-
-        .highlight { color: var(--accent); font-weight: 800; text-decoration: underline; }
-        .num { color: var(--point); font-weight: 900; margin-right: 10px; }
-
-        /* 테마 토글 버튼 */
-        .theme-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--point);
-            color: #000;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            z-index: 1000;
-            transition: 0.2s;
-        }
-        .theme-toggle:active { transform: scale(0.9); }
-
-        .discord-btn {
-            display: block;
-            background: var(--point);
-            color: #000;
-            text-align: center;
-            padding: 22px;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 900;
-            margin: 50px 0;
-            font-size: 18px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .history-log {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 15px;
-            font-size: 13px;
-            color: var(--text-sub);
-            border: 1px solid var(--border);
-            line-height: 2;
-        }
-
-        footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 13px; }
-
-        @media (max-width: 850px) {
-            .toc-nav { grid-template-columns: repeat(2, 1fr); }
-            .toc-link:last-child { grid-column: span 2; }
-            .clause-content { padding: 20px; margin: 0 15px 20px; }
-            header { padding: 60px 20px; }
-        }
-    </style>
-</head>
-<body class="dark-mode">
-
-<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
-
-<header>
-    <h1>더 스파이크 크로스 소통방 규정</h1>
-    <p>[최종 개정판] 쾌적한 환경 유지 및 분쟁 예방을 위한 소통 가이드</p>
-</header>
-
-<div class="container">
-    <nav class="toc-nav">
-        <a href="#art1" class="toc-link">제1조 집행권한</a>
-        <a href="#art2" class="toc-link">제2조 소통매너</a>
-        <a href="#art3" class="toc-link">제3조 금지사항</a>
-        <a href="#art4" class="toc-link">제4조 정보공유</a>
-        <a href="#art5" class="toc-link">제5조 안전규정</a>
-    </nav>
-
-    <div class="notice-top">
-        <b>💡 필독 안내:</b> 본 규정은 참여하는 모든 인원이 본 규정에 동의한 것으로 간주합니다. <b>항목을 클릭하여 세부 규정을 반드시 숙지하십시오.</b> <span class="highlight">"몰랐다"는 면책 사유가 되지 않습니다.</span>
-    </div>
-
-    <!-- 제1조 운영 권한 -->
-    <div class="rule-section" id="art1">
-        <div class="section-header">제1조 (운영 권한 및 행정 집행)</div>
-        
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 관리자의 포괄적 재량 및 최종 권한</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">본 규정의 최종 해석 및 집행 권한은 방장 및 부방장(운영진)에게 귀속됩니다.
-규정에 명시되지 않은 사항이라도 채팅방의 질서를 저해한다고 판단될 경우, <span class="highlight">운영진은 행정적 재량권을 발동하여 즉시 제재(경고, 퇴장, 영구 차단)를 가할 수 있습니다.</span>
-운영진의 조치는 규정 문구보다 우선하는 절대적 효력을 가지며, 관리자의 정당한 조치에 대해 '주관적이다'라고 항의하는 행위는 가중 처벌 대상입니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 무관용 원칙 및 규정 우회 엄금</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">“규정을 몰랐다”는 사실은 면책 사유가 되지 않으며, 공지 확인 의무는 전적으로 유저 본인에게 있습니다.
-규정의 허점을 찾아 교묘하게 분란을 유도하거나 타 유저를 불쾌하게 하는 <span class="highlight">‘규정 우회 행위’는 본 규정 위반보다 엄중히 처벌</span>합니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 공개 항의 금지 및 문의 절차</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">운영진의 제재나 운영 방식에 대한 이의 제기는 반드시 <span class="highlight">1:1 채팅</span>을 통해서만 가능합니다.
-공개 채팅방에서의 선동, 항의, 관리자 비하 등은 발견 즉시 강제 퇴장 사유가 됩니다. 본 방은 민주적 토론장이 아닌 관리형 소통 공간입니다.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 제2조 소통 매너 -->
-    <div class="rule-section" id="art2">
-        <div class="section-header">제2조 (기본 매너 및 소통 가이드라인)</div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 언어 사용 및 맥락적 제재 기준</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[존댓말 원칙] 모든 대화는 상호 존댓말 사용을 원칙으로 하며 비꼬기, 반말, 공격적인 어조, 하대하는 태도를 일절 금합니다.
-[맥락적 제재] 직접적인 욕설이 없더라도, <span class="highlight">운영진이 판단하기에 상대를 모욕, 조롱, 기만할 의도가 다분하거나 분위기를 험악하게 만든다고 간주될 경우</span> 즉시 제재합니다. 초성 욕설이나 단어 변형을 통한 우회 표현도 동일하게 엄단합니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 친목질 및 집단 배척(텃세) 금지</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[대화 독점 금지] 특정 인원 간의 닉네임 언급, 사적인 과거 회상 등 폐쇄적인 대화로 타인의 참여를 배제하는 행위를 금합니다.
-[네임드화 금지] 특정 유저를 추종하거나 추켜세워 방 내에 서열이 존재하는 듯한 분위기를 조성하는 행위를 금합니다.
-[텃세 엄단] 신규 유입 인원에 대한 고의적 무시나 답변 거부는 <span class="highlight">'방 파괴 행위'</span>로 간주하여 가장 엄중히 처벌합니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 사생활 보호 및 상호 존중
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[개인정보] 본인 및 타인의 신상(나이, 학교, 실명 등)을 공개하거나 묻는 행위를 엄금합니다.
-[감정 과잉 통제] 본 소통방은 정보 공유가 목적이며, 멤버 개개인의 우울함이나 사적인 불만을 받아주는 <span class="highlight">'감정 쓰레기통'</span>이 아닙니다. 타인에게 위로를 강요하거나 분위기를 저해할 경우 제지됩니다.
-[주제 제한] 정치, 종교, 젠더, 지역 비하 등 사회적 갈등 소지가 있는 주제 언급을 금합니다.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 제3조 금지 행위 -->
-    <div class="rule-section" id="art3">
-        <div class="section-header">제3조 (금지 행위 및 제재 기준)</div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 모든 형태의 거래 및 대리 행위 (절대 금지)</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[금지 범위] 계정 거래(판매, 구매, 대여), 대리 결제, 기프트카드 교환 등 상업적 행위를 절대 금지합니다.
-[대리 플레이] 금전적 대가 여부와 관계없이 <span class="highlight">뽑기 대리, 이벤트 대리 등 계정을 맡기는 모든 행위</span>를 보안 및 사기 예방을 위해 엄격히 금합니다.
-[언급 제재] 거래 시도, 단순 언급, 시세 문의만으로도 경고 없이 즉시 강제 퇴장될 수 있습니다. "장난이었다", "떠보려고 했다"는 변명은 인정되지 않습니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 기만(비틱) 및 악성 분쟁 조장</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[기만 정의] 본인의 결과물이 좋은 것임을 인지하면서도 "이거 좋은 건가요?"라며 질문을 가장하여 자랑하는 행위를 엄금합니다.
-[불운 코스프레] 충분히 좋은 결과를 얻고도 "원하는 게 아니네요" 식의 기만질은 즉시 제재 대상입니다.
-[판단 권한] <span class="highlight">특정 발언이 기만인지 아닌지에 대한 최종 판단 권한은 전적으로 운영진의 주관적 재량</span>에 있습니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">03</span> 홍보, 도배 및 부정 행위 옹호</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[외부 유입] 타 오픈채팅방, 디스코드, 유튜브 등의 링크 게시 및 멤버 유도 행위는 즉시 퇴장 사유입니다.
-[도배] 이모티콘 3회 이상 연사, 무의미한 자음 남발, 잦은 입퇴장으로 알림 공해를 유발하는 행위를 금합니다.
-[핵/매크로] 부정 행위 프로그램의 정보 공유 및 이를 사용한 <span class="highlight">인증이나 옹호 발언 시 경고 없이 영구 차단</span>합니다.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 제4조 정보 규정 -->
-    <div class="rule-section" id="art4">
-        <div class="section-header">제4조 (정보 공유 및 질문 규정)</div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 질문 전 검색 및 답변 예절</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[검색 의무] 질문 전 공지사항, 공식카페, 이전 대화 검색을 반드시 선행하십시오. 반복 질문은 제재 대상입니다.
-[답변 강요 금지] 질문은 자유이나 답변은 의무가 아닙니다. 답변이 없다고 재촉하거나 화를 내는 행위는 비매너 조항으로 처벌됩니다.
-[허위 사실] 확인되지 않은 루머나 뇌피셜을 공식 정보처럼 유포하여 혼란을 주는 행위를 금합니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 스포일러 및 유출 정보 통제</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[스포 표기] 신규 스토리 및 캐릭터 연출 언급 시 반드시 '스포주의' 문구와 <span class="highlight">충분한 공백(미리보기 방지)</span>을 두어야 합니다.
-[유출본] 정식 업데이트 전 데이터 마이닝 등을 통해 얻은 비공개 정보(유출본) 공유 시 즉시 영구 강제 퇴장 처리됩니다.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 제5조 안전 및 프로필 -->
-    <div class="rule-section" id="art5">
-        <div class="section-header">제5조 (안전 관리 및 프로필 규정)</div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">01</span> 운영진 사칭 금지 및 본인 책임</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[계정 보안] 계정 공유나 관리 소홀로 발생한 사기 피해는 운영진이 해결해 드리지 않습니다.
-[사칭 엄단] 운영진을 사칭하여 개인정보나 계정을 요구하는 행위는 발견 즉시 차단 및 신고합니다. 운영진은 절대 사적으로 유저의 비밀번호를 묻지 않습니다.</div>
-            </div>
-        </div>
-
-        <div class="clause-group">
-            <div class="clause-header" onclick="toggleClause(this)">
-                <h3><span class="num">02</span> 프로필 및 닉네임 규정</h3>
-                <span class="icon">▼</span>
-            </div>
-            <div class="clause-body">
-                <div class="clause-content">[식별 가능성] 공백 닉네임, 중복 닉네임 등 관리자가 구분하기 힘든 설정은 금지됩니다.
-[적절성] 욕설, 비하, 성적인 의미가 담긴 닉네임이나 프로필 사진 사용 시 운영진의 변경 요청에 즉시 응해야 하며, 불응 시 예고 없이 퇴장 조치합니다.</div>
-            </div>
-        </div>
-    </div>
-
-    <a href="https://discord.gg/J8he2mUFQC" class="discord-btn">⚖️ 더 스파이크 크로스 소통방 디스코드 바로가기</a>
-
-    <div class="history-log">
-        <strong>📜 규정 개정 및 업데이트 로그</strong><br>
-        • 2026.01.06 : 거래/대리 무관용 원칙 강화<br>
-        • 2025.12.05 : 규정 대규모 개정 (관리자 재량권 확립 및 우회 처벌)<br>
-        • 2025.10.26 : 사생활(TMI) 및 감정 과잉 통제 조항 신설<br>
-        • 2025.10.22 : 주의 사항 목록 규칙 추가<br>
-        • 2025.10.02 : 비틱(기만) 및 갈라치기 정의 구체화<br>
-        • 2025.08.17 : 최초 규정 수정 및 보강<br>
-        • 2025.06.28 : 규정 최초 수립
-    </div>
-
-    <footer>
-        ©  Copyright 2026. 더 스파이크 크로스 소통방 all rights reserved.<br>
-        본 운영 규정은 방의 질서와 화합을 위해 설계되었습니다.
-    </footer>
-</div>
-
-<script>
-    // 아코디언 토글 기능
-    function toggleClause(header) {
-        header.classList.toggle('active');
-        const body = header.nextElementSibling;
-        if (body.style.maxHeight && body.style.maxHeight !== "0px") {
-            body.style.maxHeight = "0px";
-        } else {
-            // 충분한 공간 확보를 위해 scrollHeight 사용
-            body.style.maxHeight = body.scrollHeight + 100 + "px";
-        }
-    }
-
-    // 테마 전환 기능
-    function toggleTheme() {
-        const body = document.body;
-        const btn = document.getElementById('themeBtn');
-        if (body.classList.contains('light-mode')) {
-            body.classList.remove('light-mode');
-            btn.innerText = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.classList.add('light-mode');
-            btn.innerText = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
-    }
-
-    // 페이지 로드 시 테마 설정
     window.onload = () => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
@@ -927,4 +449,5 @@
 
 </body>
 </html>
+
 
